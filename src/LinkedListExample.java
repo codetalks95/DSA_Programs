@@ -19,11 +19,37 @@ public class LinkedListExample {
         length = 1;
     }
 
+    public void append(int value) {
+        Node newNode = new Node(value);
+        if (length == 0) {
+            head = newNode;
+        } else {
+            tail.next = newNode;
+        }
+        tail = newNode;
+        length++;
+    }
+
+    public Node removeFirst() {
+        Node temp;
+        if (head == null) {
+            return null;
+        }
+        temp = head;
+        head = head.next;
+        temp.next = null;
+        length--;
+        if (tail == null) {
+            return null;
+        }
+        return temp;
+    }
+
     public void printList() {
         Node temp = head;
         while (temp != null) {
-            System.out.println("Value in PrintList is" + " : " + temp.value);
-            temp = head.next;
+            System.out.print(temp.value + " , ");
+            temp = temp.next;
         }
     }
 
@@ -38,8 +64,8 @@ public class LinkedListExample {
     public static void main(String[] args) {
         LinkedListExample linkedListExample = new LinkedListExample(4);
         System.out.println("Length of the LinkedList is" + " : " + linkedListExample.length);
+        linkedListExample.append(20);
+        linkedListExample.removeFirst();
         linkedListExample.printList();
-        linkedListExample.getHead();
-        linkedListExample.getTail();
     }
 }
